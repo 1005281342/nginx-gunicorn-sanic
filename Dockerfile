@@ -15,13 +15,13 @@ ENV PYTHONIOENCODING=utf-8
 RUN mkdir -p /app
 WORKDIR /app
 #only copy requirements.txt.  othors will be mounted by -v
-COPY app/requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 RUN pip3 install -r /app/requirements.txt
 
 # Setup nginx
 RUN rm /etc/nginx/sites-enabled/default
-COPY nginx_flask.conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/nginx_flask.conf /etc/nginx/sites-enabled/nginx_flask.conf
+COPY nginx_sanic.conf /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/nginx_sanic.conf /etc/nginx/sites-enabled/nginx_sanic.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Setup supervisord
